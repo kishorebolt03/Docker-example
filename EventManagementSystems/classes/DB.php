@@ -1,15 +1,12 @@
 <?php
 class DB {
-
-    private static $host = "localhost";
-    private static $database = "my_db";
-    private static $username = "db_user";
-    private static $password = "password";
-    
-    public static function getConnection() {
-        $dsn = 'mysql:host=' . DB::$host . ';dbname=' . DB::$database;
-
-        $connection = new PDO($dsn, DB::$username, DB::$password);
+    public function getConnection() {
+        $host = $_ENV["DB_HOST"];
+        $database = $_ENV["DB_DATABASE"];
+        $username = $_ENV["DB_USERNAME"];
+        $password = $_ENV["DB_PASSWORD"];
+        $dsn = 'mysql:host=' . $host . ';dbname=' . $database;
+        $connection = new PDO($dsn, $username, $password);
         $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         return $connection;
