@@ -6,14 +6,14 @@ services:
     volumes:
       - ./:/var/www/html
     ports:
-      - "8000:80"
+      - "30001:80"
     depends_on:
       - mysql
     environment:
-      MYSQL_HOST: mysql
-      MYSQL_DB: my_db
-      MYSQL_USER: db_user
-      MYSQL_PASSWORD: password
+      - DB_HOST=mysql
+      - DB_DATABASE=my_db
+      - DB_USERNAME=db_user
+      - DB_PASSWORD=password
   mysql:
     image: mysql:latest
     command: --default-authentication-plugin=mysql_native_password
