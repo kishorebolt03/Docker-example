@@ -1,8 +1,8 @@
 version: '3.7'
 services:
   php:
-    container_name: php73
-    image: php:7.3-apache
+    container_name: php
+    build: .
     volumes:
       - ./:/var/www/html
     ports:
@@ -19,6 +19,8 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     container_name: mysql
     restart: always
+    volumes:
+      - ./sql/:/docker-entrypoint-initdb.d
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: my_db
