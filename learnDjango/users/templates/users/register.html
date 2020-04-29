@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h1>Registration page</h1>
+        <form method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            {% if form.errors %}
+                <p> There is an error in your inputs </p>
+            {% endif %}
+            {{ form }}
+            <input type="submit" value="Register">
+        </form>
+    </body>
+</html>

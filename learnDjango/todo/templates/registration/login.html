@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        {% if form.errors %}
+            <p>There is something wrong in your form inputs</p>
+        {% endif %}
+
+        {% if form.next %}
+            Sorry. You cannot access {{ form.next }} now.
+        {% endif %}
+
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <p>Username : {{ form.username }} </p>
+            <p>Password : {{ form.password }} </p>
+            <input type="submit" value="Login">
+            <input type="hidden" name="next" value="{{ form.next }}"
+        </form>
+    </body>
+</html>

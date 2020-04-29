@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+        <script src="{% static 'bootstrap.min.js' %}"></script>
+    </head>
+    <body class="jumbotron bg-dark">
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h4> What do you want to do today ? </h4>
+                        <form method="POST" action="{% url 'addTodo' %}">
+                            {% csrf_token %} 
+                            <div class="input-group mb-3 input-group-sm">
+                                {{ form.text }}
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="submit">Add</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                        <a href="{% url 'deleteCompleted' %}" class="btn btn-primary">Delete Completed</a>
+                        <a href="{% url 'deleteAll' %}" class="btn btn-primary">Delete All</a>
+                        
+                        <div class="container-fluid" style="margin-top:20px;padding:0px;">    
+                            <ul class="list-group">
+                                {% for todo in todo_list %}
+                                    {% if todo.complete %}
+                                        <li class="list-group-item text-light bg-secondary">
+                                            <del>{{todo.text}}</del>
+                                        </li>
+                                    {% else %}
+                                        <a href="{% url 'completeTodo' todo.id %}" class="list-group-item list-group-item-action text-body"> {{ todo.text }}</a>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </body>
+</html> 
